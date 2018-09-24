@@ -37,7 +37,7 @@
                                 @endif
                             </li>
                             @endforeach
-                            <li><a href="{{url('bao-duong')}}" title="">Bảo dưỡng</a></li>
+                            <li><a href="{{url('tin-tuc')}}" title="">Tin tức</a></li>
                             <li>
                                 <a href="{{url('san-pham')}}" title="">Thanh lý đồ cũ</a>
                                  <ul class="">

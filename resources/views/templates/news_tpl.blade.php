@@ -2,18 +2,19 @@
 @section('content')
 <?php
     $setting = Cache::get('setting');
-    $banner = DB::table('banner_content')->where('position', 2)->first();
+    $sliders = DB::table('slider')->where('com', 'gioi-thieu')->get();
 ?>
 
 <main class="index">
+   
     <section class="about">
-        <div class="bread-wrap" style="background: url({{ asset('upload/banner/'.$banner->image) }});">
+        <div class="vk-breadcrumb">
             <div class="container">
-                <div class="pl-95">
-                    <h1 class="s36 light text-white text-uppercase bread-tit">Phong thủy</h1>
-                    <ul class="s12 list-unstyled text-uppercase bread">
-                        <li><a href="{{url('')}}" title="">Trang chủ</a></li>
-                        <li>Phong thủy</li>
+                <div class="col-md-12">
+                    <ul class="vk-breadcrumb__list">
+                        <li><a href="{{url('')}}">Trang chủ / </a></li>
+                        <!-- <li><a href="doc.html">Sửa tivi / </a></li> -->
+                        <li class="active">Tin tức </li>
                     </ul>
                 </div>
             </div>
@@ -25,10 +26,10 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="pt-item">
                             <figure class="pt-img">
-                                <a href="{{url('phong-thuy',$item->alias.'.html')}}" title=""><img src="{{asset('upload/news/'.$item->photo)}}" title="{{$item->name}}" alt="{{$item->name}}"></a>
+                                <a href="{{url('tin-tuc',$item->alias.'.html')}}" title=""><img src="{{asset('upload/news/'.$item->photo)}}" title="{{$item->name}}" alt="{{$item->name}}"></a>
                             </figure>
                             <figcaption class="pt-content">
-                                <h2 class="bold t2 py-3 pt-content-tit"><a href="{{url('phong-thuy',$item->alias.'.html')}}" title="{{$item->name}}">{{$item->name}}</a></h2>
+                                <h2 class="bold t2 py-3 pt-content-tit"><a href="{{url('tin-tuc',$item->alias.'.html')}}" title="{{$item->name}}">{{$item->name}}</a></h2>
                                 <div class="pt-content-wrap">
                                     <p>{!! $item->mota !!}</p>
                                 </div>

@@ -131,7 +131,11 @@
 				        	<input type="checkbox" name="status" {!! (!isset($data->status) || $data->status==1)?'checked="checked"':'' !!}> Hiển thị
 				    	</label>
 				    </div>
-			    	
+			    	<div class="form-group">
+					    <label>
+				        	<input type="checkbox" name="home" {!! (!isset($data->home) || $data->home==1)?'checked="checked"':'' !!}> Hiển thị trang chủ
+				    	</label>
+				    </div>
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer col-md-12 row">

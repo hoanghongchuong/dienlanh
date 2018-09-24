@@ -263,7 +263,7 @@ main{padding-top:50px;background:#fff;}
 .vk-breadcrumb {
     background-color: #fff;
     color: #f68e56;
-    font-size: 13px;
+    font-size: 15px !important;
     font-weight: 500;
     padding: 5px 0;
     padding-top: 8px;

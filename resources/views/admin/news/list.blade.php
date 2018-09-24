@@ -48,9 +48,8 @@
               <tr>
                 <th style="width: 20px;"><input type="checkbox" name="chonhet" class="minimal" id="chonhet" /></th>
                 <th class="text-center with_dieuhuong">Stt</th>
-                @if($_GET['type']!='gioi-thieu')
-                <th>Danh mục cha</th>             
-                
+                @if($_GET['type'] == 'dich-vu')
+                <th>Danh mục cha</th>
                 @endif
                 <th>Hình ảnh</th>
                 <th>Tên bài viết</th>
@@ -64,7 +63,7 @@
               <tr>
                 <td><input type="checkbox" name="chon" id="chon" value="{{$item->id}}" class="chon" /></td>
                 <td class="text-center with_dieuhuong">{{$k+1}}</td>
-                @if($_GET['type']!='gioi-thieu')
+                @if($_GET['type'] == 'dich-vu')
                 <td>
                   <?php  $parent = DB::table('news_categories')->where('id', $item->cate_id)->where('com', @$_GET['type'])->first();
                   ?>
@@ -74,9 +73,10 @@
                     {{ 'None' }}
                   @endif
                 </td>
+                @endif
                 <td><img src="{{ asset('upload/news/'.$item->photo) }}" onerror="this.src='{{ asset('public/admin_assets/images/no-image.jpg') }}';" class="img_product"  alt="NO PHOTO" /></td>
                               
-               @endif
+              
                 <td>{{$item->name}}
                 </td>
                                
@@ -89,14 +89,13 @@
                     @endif
                   </div>
                   
-                  <div class="form-group"> 
+                 <!--  <div class="form-group"> 
                     @if($item->noibat>0)
                       <a href="backend/news/edit?id={{$item->id}}&noibat={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
                     @else
                       <a href="backend/news/edit?id={{$item->id}}&noibat={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
                     @endif
-                  </div>
-                  
+                  </div> -->                  
                 </td>
                 <td class="text-center with_dieuhuong">
                   <i class="fa fa-pencil fa-fw"></i><a href="backend/news/edit?id={{$item->id}}&type={{ @$_GET['type'] }}">Edit</a>

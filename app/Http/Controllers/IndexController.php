@@ -17,47 +17,6 @@ use App\ChiNhanh;
 class IndexController extends Controller {
 	protected $setting = NULL;
 
-	public $sortType = [
-		'price-ascending' => [
-			'text' => 'Giá: Tăng dần',
-			'order' => ['price', 'ASC']
-		],
-		'price-descending' => [
-			'text' => 'Giá: Giảm dần',
-			'order' => ['price', 'DESC']
-		],
-		// 'title-ascending' => [
-		// 	'text' => 'Tên: A-Z',
-		// 	'order' => ['name', 'ASC']
-		// ],
-		// 'title-descending' => [
-		// 	'text' => 'Tên: Z-A',
-		// 	'order' => ['name', 'DESC']
-		// ],
-		// 'created-ascending' => [
-		// 	'text' => 'Cũ nhất',
-		// 	'order' => ['created_at', 'ASC']
-		// ],
-		// 'created-descending' => [
-		// 	'text' => 'Mới nhất',
-		// 	'order' => ['created_at', 'DESC']
-		// ],
-		// 'best-selling' => [
-		// 	'text' => 'Bán chạy nhất',
-		// 	'order' => ['noibat', 'ASC']
-		// ]
-	];
-	/*
-	|--------------------------------------------------------------------------
-	| Welcome Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders the "marketing page" for the application and
-	| is configured to only allow guests. Like most of the other sample
-	| controllers, you are free to modify or remove it as you desire.
-	|
-	*/
-
 	/**
 	 * Create a new controller instance.
 	 *
@@ -91,9 +50,9 @@ class IndexController extends Controller {
 	public function index()
 	{
 		$productHot = DB::table('products')->where('status',1)->where('noibat',1)->take(8)->orderBy('stt','asc')->get();
-		$news = DB::table('news')->where('status',1)->where('noibat',1)->where('com','tin-tuc')->take(20)->orderBy('id','desc')->get();
+		$news = DB::table('news')->where('status',1)->where('com','tin-tuc')->take(15)->orderBy('id','desc')->get();
 		$products = DB::table('products')->where('status',1)->take(20)->orderBy('id','desc')->get();
-		$categories = DB::table('product_categories')->where('status',1)->where('noibat',1)->take(4)->orderBy('stt','asc')->get();
+		$categories = DB::table('news_categories')->where('status',1)->where('com','dich-vu')->where('home',1)->take(2)->orderBy('stt','asc')->get();
 		$setting = Cache::get('setting');
 		$title = $setting->title;
 		$keyword = $setting->keyword;
@@ -101,7 +60,7 @@ class IndexController extends Controller {
 		$com = 'index';
 		// End cấu hình SEO
 		$img_share = asset('upload/hinhanh/'.$setting->photo);
-		return view('templates.index_tpl', compact('com','keyword','description','title','img_share','productHot','products','categories'));
+		return view('templates.index_tpl', compact('com','keyword','description','title','img_share','productHot','products','categories','news'));
 	}
 	public function getProduct(Request $req)
 	{
@@ -307,6 +266,7 @@ class IndexController extends Controller {
 	public function getNewsDetail($id)
 	{
 		$news_detail = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->where('alias',$id)->get()->first();
+		
 		$cateNews = DB::table('news_categories')->where('com','tin-tuc')->get();
 		if(!empty($news_detail)){			
 			$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',0)->orderby('id','asc')->get();

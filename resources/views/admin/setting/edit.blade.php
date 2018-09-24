@@ -47,10 +47,10 @@
 								      	<label for="ten">Địa chỉ</label>
 								      	<input type="text" name="txtAddress" value="{!! old('txtAddress', isset($data) ? $data->address : null) !!}"  class="form-control" />
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 								      	<label for="ten">Website</label>
 								      	<input type="text" name="txtWebsite" value="{!! old('txtWebsite', isset($data) ? $data->website : null) !!}"  class="form-control" />
-									</div>
+									</div> -->
 									<div class="form-group">
 								      	<label for="ten">Email</label>
 								      	<input type="text" name="txtEmail" value="{!! old('txtEmail', isset($data) ? $data->email : null) !!}"  class="form-control" />
@@ -71,10 +71,10 @@
 								      	<label for="ten">Tọa độ</label>
 								      	<input type="text" name="txtToado" value="{!! old('txtToado', isset($data) ? $data->toado : null) !!}"  class="form-control" />
 									</div> -->
-									<div class="form-group">
+									<!-- <div class="form-group">
 								      	<label for="ten">Link trang sản phẩm</label>
 								      	<input type="text" name="txtTitle_index" value="{!! old('txtTitle_index', isset($data) ? $data->title_index : null) !!}"  class="form-control" />
-									</div>
+									</div> -->
 									<div class="form-group">
 								      	<label for="ten">Copyright</label>
 								      	<input type="text" name="txtCopyright" value="{!! old('txtCopyright', isset($data) ? $data->copyright : null) !!}"  class="form-control" />
@@ -101,14 +101,14 @@
 								      	<label for="ten">Youtube</label>
 								      	<input type="text" name="txtYoutube" value="{!! old('txtYoutube', isset($data) ? $data->youtube : null) !!}"  class="form-control" />
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 								      	<label for="desc">Code chat</label>
 								      	<textarea name="txtCodechat" rows="5" class="form-control">{{ old('txtCodechat', isset($data) ? $data->codechat : null) }}</textarea>
 									</div>
 									<div class="form-group">
 								      	<label for="desc">Link bản đồ</label>
 								      	<textarea name="txtIframemap" rows="5" class="form-control">{{ old('txtIframemap', isset($data) ? $data->iframemap : null) }}</textarea>
-									</div>
+									</div> -->
 									<div class="form-group">
 								      	<label for="desc">Analytics</label>
 								      	<textarea name="txtAnalytics" rows="5" class="form-control">{{ old('txtAnalytics', isset($data) ? $data->analytics : null) }}</textarea>
@@ -163,14 +163,14 @@
 								 	<input type="file" name="fImages_footer" >
 									<p class="help-block">Width:234px - Height: 51px</p>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<div class="form-group">
 										<img src="{{ asset('upload/hinhanh/'.$data->photo_page) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" width="200"  alt="NO PHOTO" />
 									</div>
 									<label for="file">Chọn file logo page</label>
 								 	<input type="file" name="fImages_page" >
 									<p class="help-block">Width:234px - Height: 51px</p>
-								</div>
+								</div> -->
 							</div>
 	                	</div>
 

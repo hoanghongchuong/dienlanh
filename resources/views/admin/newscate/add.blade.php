@@ -123,7 +123,11 @@
 				        	<input type="checkbox" name="status" checked="checked"> Hiển thị
 				    	</label>
 				    </div>
-			    	
+			    	<div class="form-group">
+					    <label>
+				        	<input type="checkbox" name="home"> Hiển thị trang chủ
+				    	</label>
+				    </div>
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

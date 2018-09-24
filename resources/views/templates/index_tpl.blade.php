@@ -3,190 +3,111 @@
 
 <?php
 $setting = Cache::get('setting');
-$sliders = DB::table('slider')->select()->where('status',1)->where('com','gioi-thieu')->orderBy('created_at','desc')->get();
+$sliders = DB::table('slider')->select()->where('status',1)->where('com','gioi-thieu')->get();
 ?>
- <section class="vk-content">
-
-    <div class="vk-home  vk-home--banner">
-        <div class="container">
-            <div class="vk-banner vk-banner-style-4 vk-slider vk-slider--style-1" data-slider="home">
-                @foreach($sliders as $slider)
-                <div class="_item vk-img">
-                    <img src="{{asset('upload/hinhanh/'.$slider->photo)}}" alt="">
-                </div>
+<main class="index">
+    <section class="container">
+        <div class="slider-area">
+            <div id="slider">
+                @foreach($sliders as $k=>$slider)
+                <a href="#" title=""><img alt="" class="slider-img" src="{{asset('upload/hinhanh/'.$slider->photo)}}" alt="slider-img" title="#caption{{$k}}" /></a>
                 @endforeach
             </div>
         </div>
-    </div> <!--./banner-->
-    <div class="vk-home vk-home--shop">
+    </section>
+    <!-- slider-area-end -->
+    @foreach($categories as $category)
+    <section class="nt">
         <div class="container">
-            <h1 class="vk-home__title">Sản phẩm tiêu biểu</h1>
-            <div class="vk-shop__list row">
-				@foreach($productHot as $hot)
-                <div class="col-sm-6 col-lg-3 _item">
-                    <div class="vk-shop-item vk-shop-item--style-3">
-                        <a href="{{ url('san-pham/'.$hot->alias.'.html') }}" title="{{$hot->name}}" class="vk-img vk-img--mw100 ">
-                            <img src="{{asset('upload/product/'.$hot->photo)}}" alt="{{$hot->name}}" class="vk-img__img">
-                            <span class="_sale">- {{ round(100-($hot->price / $hot->price_old)*100) }} %</span>
-                        </a>
-                        <div class="vk-shop-item__brief">
-                            <h3 class="vk-shop-item__title"><a href="{{ url('san-pham/'.$hot->alias.'.html') }}" title="{{$hot->name}}">{{$hot->name}}</a></h3>
-                            <div class="vk-shop-item__price">
-                            	{{number_format($hot->price)}} đ 
-                            	@if($hot->price < $hot->price_old)
-                            	<span class="_old">{{number_format($hot->price_old)}} đ</span>
-								@endif
-                            </div>
-                            <div class="vk-shop-item__button">
-                                <a href="#" class="vk-btn vk-btn--grey-1" title="Thêm vào giỏ"><img src="{{ asset('public/images/icon-3.png')}}" alt=""></a>
-                                <a href="{{ url('san-pham/'.$hot->alias.'.html') }}" class="vk-btn vk-btn--grey-1" title="Xem thêm"><i class="ti-search"></i></a>
-                            </div>
+            <h2 class="s24 text-center text-uppercase tit">{{$category->name}}</h2>
+            <?php 
+                $ids = [];
+                $ids[] = $category->id;
+                $cateChidls = DB::table('news_categories')->where('status',1)->where('parent_id', $category->id)->get();
+                foreach ($cateChidls as $key => $value) {
+                    $ids[] = $value->id;
+                }
+                $services = DB::table('news')->where('com','dich-vu')->whereIn('cate_id', $ids)->take(6)->orderBy('stt','asc')->get();
+            ?>
+            <div class="nt-wrap">
+                <div class="row">
+                    @foreach($services as $service)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="nt-item">
+                            <figure class="text-center nt-img">
+                                <a href="{{ url('dich-vu/'.$service->alias.'.html') }}" title=""><img src="{{asset('upload/news/'.$service->photo)}}" title="{{$service->name}}" alt="{{$service->name}}"></a>
+                            </figure>
+                            <figcaption class="nt-info">
+                                <p class="text-center">
+                                    <img src="{{ asset('public/images/line.png')}}" title="{{$service->name}}" alt="{{$service->name}}">
+                                </p>
+                                <h3 class="light s18 text-center stit"><a href="{{ url('dich-vu/'.$service->alias.'.html') }}" title="{{$service->name}}">{{$service->name}} </a></h3>
+                            </figcaption>
                         </div>
-                    </div> <!--./vk-shop-item-->
+                    </div>
+                    @endforeach
                 </div>
-				@endforeach
             </div>
         </div>
-    </div> <!--./shop-->
-
-    <div class="vk-home vk-home--cat">
+    </section>
+    @endforeach
+    <!-- <section class="text-white why">
         <div class="container">
-            <h2 class="vk-home__title">Trang trí nội thất</h2>
+            <h2 class="s24 text-center text-uppercase pb-4 tit wow bounceInUp" data-wow-delay='.2s'>Tại sao chọn chúng tôi</h2>
+
+            <h3 class="w-lg-50 text-center pb-4 s14 wow bounceInUp" data-wow-delay='.6s'>Chúng ta vẫn biết rằng, làm việc với một đoạn văn bản dễ đọc và rõ nghĩa dễ gây rối trí và cản trở việc tập trung vào yếu tố trình bày văn bản.</h3>
+
             <div class="row">
-
-                <div class="_item col-lg-6">
-                    <a href="shop.html" class="vk-cate-item vk-cate-item--style-1" title="Sofa <br> Ghế phòng khách">
-                        <div class="vk-img vk-img--cover">
-                            <img src="{{ asset('public/images/cat-1.jpg')}}" alt="">
-                        </div>
-                        <div class="vk-cate-item__brief">
-                            <div class="vk-box  vk-box--style-2">
-                                <h3 class="vk-box__title">
-                                    Sofa <br> Ghế phòng khách
-                                    <span class="vk-btn vk-btn--grey-7">Xem ngay </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </a>
+                <div class="col-lg-3 col-6">
+                    <div class="text-center why-item">
+                        <div class="text-center wow rotateIn" data-wow-delay='1s' data-wow-duration=".8s"><img src="images/icon1.png" title="" alt=""></div>
+                        <h4 class="s16 wow fadeInUp" data-wow-delay='1.2s'>100% sản phẩm nhập khẩu</h4>
+                    </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="row _h100">
-                        <div class="_item col-lg-12 _h50">
-                            <a href="shop.html" class="vk-cate-item vk-cate-item--style-2" title="Kệ trang trí">
-                                <div class="vk-img vk-img--cover">
-                                    <img src="{{ asset('public/images/cat-2.jpg')}}" alt="">
-                                </div>
-                                <div class="vk-cate-item__brief">
-
-                                    <div class="vk-box  vk-box--style-2">
-                                        <h3 class="vk-box__title">
-                                            Kệ trang trí
-                                            <span class="vk-btn vk-btn--grey-7">Xem ngay </span>
-                                        </h3>
-
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="_item col-lg-12 _h50">
-                            <a href="shop.html" class="vk-cate-item vk-cate-item--style-2" title="Lưu trữ nhà bếp">
-                                <div class="vk-img vk-img--cover">
-                                    <img src="{{ asset('public/images/cat-3.jpg')}}" alt="">
-                                </div>
-                                <div class="vk-cate-item__brief">
-
-                                    <div class="vk-box  vk-box--style-2">
-                                        <h3 class="vk-box__title">
-                                            Lưu trữ nhà bếp
-                                            <span class="vk-btn vk-btn--grey-7">Xem ngay </span>
-                                        </h3>
-
-
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                    </div> <!--./row-->
+                <div class="col-lg-3 col-6 ">
+                    <div class="text-center why-item">
+                        <div class="text-center wow rotateIn" data-wow-delay='1s' data-wow-duration=".8s"><img src="images/icon2.png" title="" alt=""></div>
+                        <h4 class="s16 wow fadeInUp" data-wow-delay='1.2s'>Đơn giản - Tinh tế</h4>
+                    </div>
                 </div>
 
-            </div>
-        </div>
-    </div> <!--./cat-->
-
-    <div class="vk-home vk-home--shop-new">
-        <div class="container">
-            <h2 class="vk-home__title">Sản phẩm mới</h2>
-            <div class="vk-shop__list row vk-slider" data-slider="home-shop">
-			@foreach($products as $item)
-                <div class="col-sm-6 col-lg-3 _item">
-                    <div class="vk-shop-item vk-shop-item--style-3">
-                        <a href="{{ url('san-pham/'.$item->alias.'.html') }}" title="{{ $item->name }}" class="vk-img vk-img--mw100 ">
-                            <img src="{{asset('upload/product/'.$item->photo)}}" alt="{{ $item->name }}" class="vk-img__img">
-                            <span class="_sale">- {{ round(100-($item->price / $item->price_old)*100) }} %</span>
-                        </a>
-                        <div class="vk-shop-item__brief">
-                            <h3 class="vk-shop-item__title"><a href="{{ url('san-pham/'.$item->alias.'.html') }}" title="{{ $item->name }}">{{$item->name}}</a></h3>
-                            <div class="vk-shop-item__price">{{number_format($item->price)}} đ <span class="_old">{{number_format($item->price_old)}} đ</span></div>
-                            <div class="vk-shop-item__button">
-                                <a href="#" class="vk-btn vk-btn--grey-1" title="Thêm vào giỏ"><img src="{{ asset('public/images/icon-3.png')}}" alt="{{ $item->name }}"></a>
-                                <a href="{{ url('san-pham/'.$item->alias.'.html') }}" class="vk-btn vk-btn--grey-1" title="Xem thêm"><i class="ti-search"></i></a>
-                            </div>
-                        </div>
-                    </div> <!--./vk-shop-item-->
+                <div class="col-lg-3 col-6 ">
+                    <div class="text-center why-item">
+                        <div class="text-center wow rotateIn" data-wow-delay='1s' data-wow-duration=".8s"><img src="images/icon3.png" title="" alt=""></div>
+                        <h4 class="s16 wow fadeInUp" data-wow-delay='1.2s'>Đẳng cấp - Sang trọng</h4>
+                    </div>
                 </div>
-			@endforeach
-                
-            </div>
-        </div>
-    </div>
 
-    <div class="vk-home vk-home--cat-1">
-        <div class="container">
-            <h2 class="vk-home__title">Danh mục tiêu biểu</h2>
-            <div class="vk-cate__list row">
-				@foreach($categories as $cate)	
-                <div class="col-lg-6">
-                    <a href="{{url('san-pham/'.$cate->alias)}}" class="vk-cate-item vk-cate-item--style-3" title="{{$cate->name}}">
-                        <div class="vk-img vk-img--cover">
-                            <img src="{{asset('upload/product/'.$cate->photo)}}" alt="{{$cate->name}}">
-                        </div>
-                        <div class="vk-cate-item__brief">
-
-                            <h2 class="vk-cate-item__title">{{$cate->name}}</h2>
-                        </div>
-                    </a>
-                </div>
-				@endforeach
-                
-            </div>
-        </div>
-    </div>
-
-
-    <div class="vk-map vk-map--home">
-        <div class="vk-map__img">
-            <img src="{{ asset('public/images/map-2.jpg')}}" alt="">
-        </div>
-
-        <div class="vk-map__main">
-            <div class="container">
-                <div class="vk-map__wrapper">
-                    <div class="vk-map__content">
-                        <h2 class="vk-map__title">HỆ THỐNG CỦA HÀNG VIDCOM</h2>
-                        <div class="vk-map__text">
-                            Vidcom hiện đang sở hữu hệ thống 16 Siêu thị Nội Thất và Trang Trí tại hai thành phố chính
-                            của
-                            Việt Nam là Hà Nội và TP.Hồ Chí Minh.
-                        </div>
-                        <a href="{{url('cua-hang')}}" class="vk-btn vk-btn--white vk-map__btn">Xem hệ thống cửa hàng</a>
+                <div class="col-lg-3 col-6 ">
+                    <div class="text-center why-item">
+                        <div class="text-center wow rotateIn" data-wow-delay='1s' data-wow-duration=".8s"><img src="images/icon4.png" title="" alt=""></div>
+                        <h4 class="s16 wow fadeInUp" data-wow-delay='1.2s'>Thiết kế bởi các Designer hàng đầu thế giới</h4>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!--./map-->
-
-</section>
+    </section> -->
+    <section class="blog">
+        <div class="container">
+            <h2 class="s24 text-center text-uppercase tit">Tin tức</h2>
+            <div class="blog-slider">
+                @foreach($news as $item)
+                <article class="blog-item">
+                    <figure class="text-center blog-img">
+                        <a href="{{ url('tin-tuc/'.$item->alias.'.html') }}" title=""><img src="{{asset('upload/news/'.$item->photo)}}" title="{{$item->name}}" alt="{{$item->name}}"></a>
+                    </figure>
+                    <figcaption class="blog-info">
+                        <h3 class="s16 bold"><a href="{{ url('tin-tuc/'.$item->alias.'.html') }}" title="{{$item->name}}">{{$item->name}}</a></h3>
+                        <div class="s14 blog-content">
+                            <p>{{$item->mota}}</p>
+                        </div>
+                    </figcaption>
+                </article>
+                @endforeach
+                
+            </div>
+        </div>
+    </section>
+</main>
 @endsection

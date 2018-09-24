@@ -20,12 +20,12 @@ Route::post('cartajax/add', ['as' => 'addProductToCartAjax', 'uses' => 'IndexCon
 Route::get('lien-he',['as'=>'getContact', 'uses'=>'ContactController@getContact']);
 Route::post('lien-he',['as'=>'postContact', 'uses'=>'ContactController@postContact']);
 Route::get('cua-hang','IndexController@store')->name('store');
-
-Route::get('catalog', 'IndexController@catalog')->name('catalog');
-
 // Ajax load more project
 Route::get('loadmore/project','IndexController@loadmoreProject')->name('loadmoreProject');
 
+Route::get('tin-tuc',['as'=>'getNews', 'uses'=>'IndexController@getNews']);
+Route::get('tin-tuc/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsDetail']);
+Route::get('tin-tuc/{id}',['as'=>'getListNews', 'uses'=>'IndexController@getListNews']);
 
 Route::get('tim-kiem',['as'=>'search', 'uses'=>'IndexController@search']);
 Route::post('newsletter',['as'=>'postNewsletter', 'uses'=>'IndexController@postNewsletter']);
@@ -34,8 +34,6 @@ Route::get('san-pham/{alias}.html','IndexController@getProductDetail')->name('de
 Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductList']);
 Route::get('danh-muc/{alias}', 'IndexController@getProductByCate')->name('detailCategory');
 
-Route::get('hang-moi-ve', 'IndexController@newProduct');
-Route::get('ban-chay', 'IndexController@productSelling');
 
 Route::get('product/filter', 'IndexController@productFilder')->name('product.filter');
 
