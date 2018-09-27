@@ -339,3 +339,37 @@ main{padding-top:50px;background:#fff;}
     background: #e2b846 !important;
     color: #fff !important;
 }
+.vk-shop-detail__title {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+.vk-shop-detail__status {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e2e2;
+}
+.vk-shop-detail__price-box {
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e2e2;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.vk-shop-detail__short-des {
+    border-bottom: 1px solid #e2e2e2;
+    margin-bottom: 20px;
+}
+.vk-shop-detail__price-box ._old {
+    display: inline-block;
+    padding-left: 30px;
+    font-size: 18px;
+    color: #888888;
+    text-decoration: line-through;
+}
+.vk-shop-detail__bot {
+    margin-top: 50px;
+}
+.vk-shop-detail__title-sub {
+    font-size: 24px;
+    padding-top: 8px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
